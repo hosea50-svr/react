@@ -1,0 +1,187 @@
+body{
+  background-color: whitesmoke;
+}
+.create-container{
+  padding: 40px;
+  background: #f4f6f9;
+  min-height: 100vh;
+}
+
+.post-form{
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.blog-container {
+  padding: 40px;
+  background: #f4f6f9;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 100px 100px 100px;
+}
+
+.blog-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.5rem;
+  color: rgb(24, 57, 148);
+}
+.header{
+  color: rgb(207, 176, 0);
+}
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.blog-card {
+  background: #ffffff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.5s ease;
+  padding: 20px;
+}
+
+.blog-card:hover {
+  transform: translateY(-8px);
+}
+
+.blog-read-more,
+.blog-like{
+  padding: 10px 15px;
+  border: none;
+  background: gray;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin: 1px;
+}
+.blog-read-more{
+  margin-top: auto;
+}
+
+
+.blog-like{
+  background-color: gold;
+}
+.blog-read-more{
+  width: 100%;
+  margin-bottom:3px;
+}
+.blog-delete,
+.blog-edit{
+  color: red;
+  font-family: sans-serif;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+.blog-edit{
+  color: gold;
+}
+
+.blog-delete:hover,
+.blog-edit:hover{
+  opacity: 0.7;
+  transform: translateY(-3px) scale(1.03);
+}
+.users-btn{
+  display: flex;
+  justify-content: space-between;
+}
+
+.blog-content button:hover {
+  background: gold;
+}
+
+/*POST Form Css*/
+
+.add-form {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.add-form h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: rgb(218, 185, 0);
+}
+
+.add-form input,
+.add-form textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.3s ease;
+  outline: none;
+}
+
+.add-form input:focus,
+.add-form textarea:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.add-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.add-form button {
+  padding: 12px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.add-form button:hover {
+  background: #25af2c;
+  transform: translateY(-2px);
+}
+
+.blog-image{
+  height: 300px;
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+}
+.login-btn{
+  border: none;
+  background-color: gold;
+  padding: 7px;
+  border-radius: 5px;
+  float:right;
+  color: white;
+  font-weight: bold;
+}
+.previous-blog-page-btn,
+.next-blog-page-btn{
+  background-color: gold;
+  margin: 5px;
+  border-radius: 5px;
+}
+.next-blog-page-btn{
+  background-color: black;
+}
+
+
+

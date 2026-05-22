@@ -1,0 +1,72 @@
+.header {
+    background: #111;
+    color: white;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Desktop nav */
+.nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+.nav a:hover {
+    color: white;
+}
+
+/* Menu button hidden on desktop */
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* MOBILE */
+@media screen and (max-width: 768px) {
+
+    .menu-btn {
+        display: block;
+    }
+
+    .nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #111;
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .nav.open {
+        display: flex;
+    }
+}
