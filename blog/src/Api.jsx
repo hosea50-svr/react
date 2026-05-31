@@ -2,7 +2,7 @@ import { getUserId } from "./auth";
 import { getToken } from "./auth";
 import "./Api.css";
 import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import  Footer  from "./components/Footer"
 import Header from "./components/Header";
 import { Modal } from "bootstrap";
@@ -171,7 +171,16 @@ const handleDelete = (id) => {
       <div className="blog-container">
         <div>
           <form className="add-form" onSubmit={handleAddPost}>
+            <p className="fs-6">
+              Note only registered users are allowed to add blog post
+            </p>
              <h2>Create New Post</h2>
+             <Link to='/register'>
+                  <span className="text-success">
+                    register
+                </span>
+             </Link>
+             
           <input
             type="text"
             placeholder="Title"
@@ -192,8 +201,9 @@ const handleDelete = (id) => {
           /><br/>
           <button type="submit">Add Post</button>
         </form>
-
         </div>
+
+
           <div className="blog-grid">
               {currentPosts.map((post) => (
                 <div className="card blog-card" key={post.id}>
@@ -210,7 +220,7 @@ const handleDelete = (id) => {
                     <div className="users-btn">
                       <p
                         onClick={() => navigate(`/edit/${post.id}`)}
-                        className="blog-edit"
+                        className="blog-edit mb-3"
                       >
                         Edit
                       </p>
@@ -229,11 +239,11 @@ const handleDelete = (id) => {
                       >
                         Delete
                       </button>
-            </div>
+                </div>
                   )}
                   <button
                     onClick={() => navigate(`/blog/${post.id}`)}
-                    className="blog-read-more"
+                    className="blog-read-more mt-3"
                   >
                     Read More
                   </button>

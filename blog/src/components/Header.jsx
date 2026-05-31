@@ -1,35 +1,3 @@
-// import { useState } from "react";
-// import { Link } from "react-router-dom";
-// import "./Header.css"
-
-
-// export default function Header() {
-//   const [open, setOpen] = useState(false);
-//   return (
-//     <header className="header">
-//       <div className="header-container">
-//         <div className="logo">
-//           <Link to="/">MyBlog</Link>
-//         </div>
-
-//         <nav className={open ? "nav open" : "nav"}>
-//           <Link to="/">Home</Link>
-//           {/* <Link to="/blog">Blog</Link> */}
-//           <Link to="/contact">Contact</Link>
-
-//             <Link to='/login' style={{color:"gold",fontWeight:'bold'}}>
-//                 Login
-//             </Link>
-//         </nav>
-
-//         <button className="menu-btn" onClick={() => setOpen(!open)}>
-//           ☰
-//         </button>
-//       </div>
-   
-//     </header>
-//   );
-// }
 
 
 import { Link } from "react-router-dom";
@@ -48,6 +16,9 @@ export default function Header() {
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -57,6 +28,10 @@ export default function Header() {
 
             <Link className="nav-link" to="/">
               Home
+            </Link>
+
+            <Link to='/register' className="text-warning nav-link">
+                  Register
             </Link>
 
             <Link className="nav-link" to="/contact">
