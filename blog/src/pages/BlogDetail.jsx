@@ -88,6 +88,7 @@ function BlogDetail() {
       </button>
 
       <button
+        type="button"
         onClick={() => navigate(-1)}
         className="back-btn p-2"
       >

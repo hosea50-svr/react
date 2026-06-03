@@ -8,6 +8,10 @@ import Header from "./components/Header";
 import { Modal } from "bootstrap";
 import WelcomeCarousel from "./components/WelcomeCarousel";
 
+import { useSearchParams } from "react-router-dom";
+
+
+
 function App() {
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
@@ -20,7 +24,12 @@ function App() {
 
   const [deleteId, setDeleteId] = useState(null);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+const currentPage = Number(searchParams.get("page")) || 1;
+
+
   const postsPerPage = 9;
 
   const indexOfLastPost = currentPage * postsPerPage;
@@ -28,12 +37,17 @@ function App() {
 
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, [currentPage]);
+  const totalPages = Math.ceil(posts.length / postsPerPage);
+
+    const goToPage = (page) => {
+      if (page < 1 || page > totalPages) return;
+      setSearchParams({ page });
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    };
 
 
       const truncateText = (text, maxLength) => {
@@ -172,7 +186,7 @@ const handleDelete = (id) => {
         <div>
           <form className="add-form" onSubmit={handleAddPost}>
             <p className="fs-6">
-              Note only registered users are allowed to add blog post
+              Note: only registered users are allowed to add blog post
             </p>
              <h2>Create New Post</h2>
              <Link to='/register'>
@@ -204,52 +218,52 @@ const handleDelete = (id) => {
         </div>
 
 
-          <div className="blog-grid">
-              {currentPosts.map((post) => (
-                <div className="card blog-card" key={post.id}>
-                  <div className="card-img-top">
-                    <img src={getImageUrl(post.image)} className="blog-image" />
-                  </div>
-                  <div className="card-title">
-                    <h4 className="blog-title">{post.title}</h4>
-                  </div>
-                  <div className="card-title">
-                     <p>{truncateText(post.content, 100)}</p>
-                  </div>
-                  {post.user == currentUserId && (
-                    <div className="users-btn">
-                      <p
-                        onClick={() => navigate(`/edit/${post.id}`)}
-                        className="blog-edit mb-3"
-                      >
-                        Edit
-                      </p>
+         <div className="blog-grid">
+  {currentPosts.map((post) => (
+    <div className="card blog-card h-100" key={post.id}>
+      <img
+        src={getImageUrl(post.image)}
+        className="card-img-top blog-image"
+        alt={post.title}
+      />
 
-                      {/* <p
-                        onClick={() => handleDelete(post.id)}
-                        className="blog-delete"
-                      >
-                        Delete
-                      </p> */}
-                      <button
-                        className="btn btn-danger"
-                        data-bs-toggle="modal"
-                        data-bs-target="#deleteModal"
-                        onClick={() => setDeleteId(post.id)}
-                      >
-                        Delete
-                      </button>
-                </div>
-                  )}
-                  <button
-                    onClick={() => navigate(`/blog/${post.id}`)}
-                    className="blog-read-more mt-3"
-                  >
-                    Read More
-                  </button>
-                </div>
-              ))}
+      <div className="card-body d-flex flex-column">
+        <h4 className="card-title">{post.title}</h4>
+
+        <p className="card-text">
+          {truncateText(post.content, 100)}
+        </p>
+
+        {post.user == currentUserId && (
+          <div className="users-btn mb-3">
+            <p
+              onClick={() => navigate(`/edit/${post.id}`)}
+              className="blog-edit"
+            >
+              Edit
+            </p>
+
+            <button
+              className="btn btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#deleteModal"
+              onClick={() => setDeleteId(post.id)}
+            >
+              Delete
+            </button>
           </div>
+        )}
+
+        <button
+          onClick={() => navigate(`/blog/${post.id}`)}
+          className="blog-read-more mt-auto"
+        >
+          Read More
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
             
           <div
             className="modal fade"
@@ -305,19 +319,19 @@ const handleDelete = (id) => {
             </div>
           </div>
             <div className="pagination">
+
               <button
-                className="previous-blog-page-btn"
-                onClick={() => setCurrentPage((p) => p - 1)}
                 disabled={currentPage === 1}
+                className="previous-blog-page-btn"
+                onClick={() => goToPage(currentPage - 1)}
               >
                 Previous
               </button>
 
               <button
                 className="next-blog-page-btn"
-                onClick={() => setCurrentPage((p) => p + 1)}
-                
-                disabled={indexOfLastPost >= posts.length}
+                disabled={currentPage >= totalPages}
+                onClick={() => goToPage(currentPage + 1)}
               >
                 Next
               </button>

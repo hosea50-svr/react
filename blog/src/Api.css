@@ -184,4 +184,25 @@ body{
 }
 
 
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
 
+.blog-card {
+  height: 100%;
+}
+
+.blog-image {
+  height: 220px;
+  object-fit: cover;
+}
+
+.blog-title {
+  min-height: 60px;
+}
+
+.card-text {
+  min-height: 80px;
+}

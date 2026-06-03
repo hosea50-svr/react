@@ -8,6 +8,7 @@ import BlogDetail from "./pages/BlogDetail";
 import ContactPage from "./pages/ContactPage";
 // import MainLayout from "./layouts/MainLayout";
 
+
 function App() {
   return (
     <Routes>
