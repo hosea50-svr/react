@@ -2,7 +2,7 @@ import React from "react";
 
 const WelcomeCarousel = () => {
   return (
-    <div id="welcomeCarousel" className="carousel slide" data-bs-ride="carousel"  data-bs-interval="3000">
+    <div id="welcomeCarousel" className="carousel slide mb-1" data-bs-ride="carousel"  data-bs-interval="3000">
 
       {/* Indicators */}
       <div className="carousel-indicators">

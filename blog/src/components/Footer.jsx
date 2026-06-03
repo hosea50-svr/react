@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-left">
-          <h3>MyBlog</h3>
+          <h3 className="text-warning">MyBlog</h3>
           <p>Sharing knowledge, ideas, and inspiration.</p>
         </div>
 
@@ -22,15 +22,21 @@ export default function Footer() {
             <a 
               href="https://www.facebook.com/share/1ELu4gaXpm/"
               target="_blank"
-              rel="noopener noreferrer"
-            
+              rel="noopener noreferrer"           
             ><i className="bi bi-facebook m-2 text-primary"></i></a>
-            <a href=""><i className="bi bi-instagram m-2"></i></a>
+
+            <a href=""><i className="bi bi-instagram m-2 text-warning"></i></a>
+
             <a href="https://wa.me/2348103189576"
               target="_blank"
               rel="noopener noreferrer"
             ><i className="bi bi-whatsapp m-2 text-success"></i></a>
+
             <a href=""><i className="bi bi-twitter-x m-2"></i></a>
+
+            <a href="https://www.youtube.com/@FunomBawa">
+              <i className="bi bi-youtube m-2 text-danger"></i>
+            </a>
           </div>
         </div>
       </div>

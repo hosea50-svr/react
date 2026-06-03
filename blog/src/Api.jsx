@@ -182,9 +182,9 @@ const handleDelete = (id) => {
       <div>
         <WelcomeCarousel />
       </div>
-      <div className="blog-container">
-        <div>
-          <form className="add-form" onSubmit={handleAddPost}>
+      <div className="blog-container mt-0 pt-2">
+        <div className="">
+          <form className="add-form mt-0" onSubmit={handleAddPost}>
             <p className="fs-6">
               Note: only registered users are allowed to add blog post
             </p>

@@ -13,6 +13,36 @@ function BlogDetail() {
   const token = getToken();
   const [blog, setBlog] = useState(null);
 
+  const [liked, setLiked] = useState(false);
+const [likesCount, setLikesCount] = useState(0);
+
+
+const handleLike = async () => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(
+      `http://127.0.0.1:8000/posts/${id}/like/`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+
+    const data = await res.json();
+
+    if (res.ok) {
+      setLiked(data.liked);
+      setLikesCount(data.likes_count);
+    }
+
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   useEffect(() => {
   fetch(`http://127.0.0.1:8000/posts/${id}/comments/`)
     .then((res) => res.json())
@@ -58,14 +88,21 @@ function BlogDetail() {
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log("Blog Data:", data);
+
         setBlog(data);
+        setLikesCount(data.likes_count);
+        setLiked(data.is_liked);
+
       });
 
   }, [id,token]);
-
+ 
   if (!blog) {
     return <h1 style={{textAlign:"center",color:'gold'}}>Loading...</h1>;
   }
+
+ 
 
   return (
     <div className="detail-container">
@@ -82,9 +119,17 @@ function BlogDetail() {
 
       <p className="blog-text">{blog.content}</p>
 
-      <button className="blog-like">
-        <i className="bi bi-heart m-2"></i>
-        Like
+      <button
+        className="blog-like"
+        onClick={handleLike}
+      >
+        <i
+          className={`bi ${
+            liked ? "bi-heart-fill" : "bi-heart"
+          } me-2`}
+        ></i>
+
+        {liked ? "Liked" : "Like"} [{likesCount}]
       </button>
 
       <button
