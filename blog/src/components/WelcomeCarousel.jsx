@@ -37,12 +37,12 @@ const WelcomeCarousel = () => {
           />
           <div className="carousel-caption d-none d-md-block">
             <h2>Welcome to My Blog</h2>
-            <p>Learn, share and grow together</p>
+            <p className="text-warning fs-5">Learn, share and grow together</p>
           </div>
         </div>
         <div className="carousel-item">
           <img
-            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644"
+            src="https://picsum.photos/seed/nature3/1200/500"
             className="d-block w-100"
             alt="African students studying"
             style={{ height: "400px", objectFit: "cover" }}
@@ -53,17 +53,16 @@ const WelcomeCarousel = () => {
           </div>
         </div>
 
-        {/* Slide 3 */}
         <div className="carousel-item">
           <img
-            src="https://images.unsplash.com/photo-1513258496099-48168024aec0"
+            src="https://picsum.photos/seed/tech1/1200/500"
             className="d-block w-100"
             alt="African girl reading book"
             style={{ height: "400px", objectFit: "cover" }}
           />
           <div className="carousel-caption d-none d-md-block">
             <h2>Read More Books</h2>
-            <p>Knowledge is power</p>
+            <p className="text-primary fs-5">Knowledge is power</p>
           </div>
         </div>
       </div>
