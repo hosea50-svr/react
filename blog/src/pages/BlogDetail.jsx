@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams,useNavigate,} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getToken } from "../auth";
-import  "./BlogDetail.css"
+import "./BlogDetail.css";
 
 function BlogDetail() {
   const [comments, setComments] = useState([]);
@@ -14,121 +14,95 @@ function BlogDetail() {
   const [blog, setBlog] = useState(null);
 
   const [liked, setLiked] = useState(false);
-const [likesCount, setLikesCount] = useState(0);
+  const [likesCount, setLikesCount] = useState(0);
 
+  const handleLike = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-const handleLike = async () => {
-  try {
-    const token = localStorage.getItem("token");
-
-    const res = await fetch(
-      `http://127.0.0.1:8000/posts/${id}/like/`,
-      {
+      const res = await fetch(`http://127.0.0.1:8000/posts/${id}/like/`, {
         method: "POST",
         headers: {
           Authorization: `Token ${token}`,
         },
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setLiked(data.liked);
+        setLikesCount(data.likes_count);
       }
-    );
-
-    const data = await res.json();
-
-    if (res.ok) {
-      setLiked(data.liked);
-      setLikesCount(data.likes_count);
+    } catch (error) {
+      console.error(error);
     }
-
-  } catch (error) {
-    console.error(error);
-  }
-};
+  };
 
   useEffect(() => {
-  fetch(`http://127.0.0.1:8000/posts/${id}/comments/`)
-    .then((res) => res.json())
-    .then((data) => setComments(data));
+    fetch(`http://127.0.0.1:8000/posts/${id}/comments/`)
+      .then((res) => res.json())
+      .then((data) => setComments(data));
   }, [id]);
 
-
   const handleComment = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const response = await fetch(
-    `http://127.0.0.1:8000/posts/${id}/comments/`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `http://127.0.0.1:8000/posts/${id}/comments/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          body,
+        }),
       },
-      body: JSON.stringify({
-        name,
-        body,
-      }),
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      setComments((prev) => [data, ...prev]);
+
+      setName("");
+      setBody("");
     }
-  );
-
-  const data = await response.json();
-
-  if (response.ok) {
-    setComments((prev) => [data, ...prev]);
-
-    setName("");
-    setBody("");
-  }
-};
+  };
 
   useEffect(() => {
-    fetch(
-      `http://127.0.0.1:8000/class/blogs/${id}/`,
-      {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      }
-    )
+    fetch(`http://127.0.0.1:8000/class/blogs/${id}/`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Blog Data:", data);
-
         setBlog(data);
         setLikesCount(data.likes_count);
         setLiked(data.is_liked);
-
       });
+  }, [id, token]);
 
-  }, [id,token]);
- 
   if (!blog) {
-    return <h1 style={{textAlign:"center",color:'gold'}}>Loading...</h1>;
+    return (
+      <h1 style={{ textAlign: "center", color: "gold", margin: "0 auto" }}>
+        Loading...
+      </h1>
+    );
   }
-
- 
 
   return (
     <div className="detail-container">
-
       <h1>{blog.title}</h1>
 
-      {blog.image && (
-        <img
-          src={`http://127.0.0.1:8000${blog.image}`}
-          alt={blog.title}
-          width="400"
-        />
-      )}
+      {blog?.image && <img src={blog.image} alt={blog.title} width="400" />}
 
       <p className="blog-text">{blog.content}</p>
 
-      <button
-        className="blog-like"
-        onClick={handleLike}
-      >
-        <i
-          className={`bi ${
-            liked ? "bi-heart-fill" : "bi-heart"
-          } me-2`}
-        ></i>
-
+      <button className="blog-like" onClick={handleLike}>
+        <i className={`bi ${liked ? "bi-heart-fill" : "bi-heart"} me-2`}></i>
         {liked ? "Liked" : "Like"} [{likesCount}]
       </button>
 
@@ -140,27 +114,23 @@ const handleLike = async () => {
         Back
       </button>
 
+      <div className="comments-section">
+        <h3>Comments</h3>
 
-        <div className="comments-section">
-      <h3>Comments</h3>
+        {comments.map((comment) => (
+          <div key={comment.id} className="comment">
+            <div>
+              <img src="/default-img.png" className="comment-img" />
+            </div>
 
-      {comments.map((comment) => (
-        <div key={comment.id} className="comment">
-          <div>
-            <img src="/default-img.png" className="comment-img" />
+            <div className="comment-details">
+              <h5>{comment.name}</h5>
+
+              <p>{comment.body}</p>
+            </div>
           </div>
-          
-         <div className="comment-details">
-          
-            <h5>{comment.name}</h5>
-
-            <p>{comment.body}</p>
-         </div>
-
-        </div>
-      ))}
-    </div>
-
+        ))}
+      </div>
 
       <div className="container">
         <form onSubmit={handleComment} className="comment-form">
@@ -180,10 +150,7 @@ const handleLike = async () => {
             required
           />
 
-          <button type="submit">
-            Post Comment
-          </button>
-
+          <button type="submit">Post Comment</button>
         </form>
       </div>
     </div>

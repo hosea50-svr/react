@@ -6,7 +6,7 @@ import Register from "./pages/Register";
 import Edit from "./pages/Edit";
 import BlogDetail from "./pages/BlogDetail";
 import ContactPage from "./pages/ContactPage";
-// import MainLayout from "./layouts/MainLayout";
+import About from "./pages/AboutPage";
 
 
 function App() {
@@ -17,7 +17,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/edit/:id" element={<Edit />}/>
         <Route path="/blog/:id" element={<BlogDetail />} />  
-        <Route path="/contact" element={<ContactPage />} />  
+        <Route path="/contact" element={<ContactPage />} /> 
+        <Route path="/about" element={<About />} /> 
     </Routes>
   );
 }

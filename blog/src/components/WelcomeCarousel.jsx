@@ -2,19 +2,32 @@ import React from "react";
 
 const WelcomeCarousel = () => {
   return (
-    <div id="welcomeCarousel" className="carousel slide mb-1" data-bs-ride="carousel"  data-bs-interval="3000">
-
-      {/* Indicators */}
+    <div
+      id="welcomeCarousel"
+      className="carousel slide mb-1"
+      data-bs-ride="carousel"
+      data-bs-interval="3000"
+    >
       <div className="carousel-indicators">
-        <button type="button" data-bs-target="#welcomeCarousel" data-bs-slide-to="0" className="active"></button>
-        <button type="button" data-bs-target="#welcomeCarousel" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#welcomeCarousel" data-bs-slide-to="2"></button>
+        <button
+          type="button"
+          data-bs-target="#welcomeCarousel"
+          data-bs-slide-to="0"
+          className="active"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#welcomeCarousel"
+          data-bs-slide-to="1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#welcomeCarousel"
+          data-bs-slide-to="2"
+        ></button>
       </div>
 
-      {/* Slides */}
       <div className="carousel-inner">
-
-        {/* Slide 1 */}
         <div className="carousel-item active">
           <img
             src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66"
@@ -27,8 +40,6 @@ const WelcomeCarousel = () => {
             <p>Learn, share and grow together</p>
           </div>
         </div>
-
-        {/* Slide 2 */}
         <div className="carousel-item">
           <img
             src="https://images.unsplash.com/photo-1523240795612-9a054b0db644"
@@ -55,18 +66,25 @@ const WelcomeCarousel = () => {
             <p>Knowledge is power</p>
           </div>
         </div>
-
       </div>
 
-      {/* Controls */}
-      <button className="carousel-control-prev" type="button" data-bs-target="#welcomeCarousel" data-bs-slide="prev">
+      <button
+        className="carousel-control-prev"
+        type="button"
+        data-bs-target="#welcomeCarousel"
+        data-bs-slide="prev"
+      >
         <span className="carousel-control-prev-icon"></span>
       </button>
 
-      <button className="carousel-control-next" type="button" data-bs-target="#welcomeCarousel" data-bs-slide="next">
+      <button
+        className="carousel-control-next"
+        type="button"
+        data-bs-target="#welcomeCarousel"
+        data-bs-slide="next"
+      >
         <span className="carousel-control-next-icon"></span>
       </button>
-
     </div>
   );
 };

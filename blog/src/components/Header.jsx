@@ -1,5 +1,4 @@
-
-
+import './Header.css' 
 import { Link } from "react-router-dom";
 
 export default function Header() {
@@ -7,8 +6,9 @@ export default function Header() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div className="container">
 
-        <Link className="navbar-brand" to="/">
-          MyBlog
+        <Link className="navbar-brand text-warning-hover" to="/">
+          <span className="brand">MyBlog</span>
+          <i className="bi bi-mortarboard text-primary"></i>
         </Link>
 
         <button
@@ -43,6 +43,13 @@ export default function Header() {
               to="/login"
             >
               Login
+            </Link>
+
+            <Link
+              className="nav-link"
+              to="/about"
+            >
+              About
             </Link>
 
           </div>

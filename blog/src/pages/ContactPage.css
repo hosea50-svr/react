@@ -39,7 +39,7 @@ textarea {
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 12px;
   outline: none;
 }
 
@@ -50,11 +50,11 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 15px;
 }
 
 button:hover {
-  background: #0056b3;
+  background: gold;
+  color: black;
 }
 
 .status {

@@ -7,13 +7,16 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-left">
-          <h3 className="text-warning">MyBlog</h3>
+          <h4 className="text-warning">MyBlog
+            <i className="bi bi-mortarboard text-primary"></i>
+          </h4>
           <p>Sharing knowledge, ideas, and inspiration.</p>
         </div>
 
         <div className="footer-links">
           <Link to="/">Home</Link>
           <Link to="/contact">Contact</Link>
+          <Link to="/about">About</Link>
         </div>
 
         <div className="footer-right">

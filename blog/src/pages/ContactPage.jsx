@@ -2,7 +2,7 @@ import { useState } from "react";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import "./ContactPage.css";
-import Header from "../components/Header"
+import Header from "../components/Header";
 
 export default function ContactPage() {
   const navigate = useNavigate();
@@ -60,84 +60,74 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="container">
+    <>
       <Header />
-      <div className="contact-wrapper">
-        <div className="contact-box">
-          <h2>Contact Us</h2>
+      <div className="container p-3">
+        <div className="contact-wrapper">
+          <div className="contact-box">
+            <h3 className="text-secondary">Contact Us</h3>
 
-          <p>
-            Send us a message and we will get back to you.
-          </p>
+            <p>Send us a message and we will get back to you.</p>
 
-          <form
-            onSubmit={handleSubmit}
-            className="contact-form"
-          >
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={form.name}
-              onChange={handleChange}
-              required
-            />
+            <form onSubmit={handleSubmit} className="contact-form">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={form.name}
+                onChange={handleChange}
+                required
+              />
 
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
 
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              value={form.message}
-              onChange={handleChange}
-              rows="6"
-              required
-            />
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                value={form.message}
+                onChange={handleChange}
+                rows="6"
+                required
+              />
 
-            <button
-              type="submit"
-              disabled={loading}
-            >
-              {loading ? "Sending..." : "Send Message"}
-            </button>
+              <button type="submit" disabled={loading}>
+                {loading ? "Sending..." : "Send Message"}
+              </button>
 
-            <button
-              type="button"
-              onClick={() => navigate("/")}
-              className="blog-edit"
-            >
-              Back
-            </button>
-          </form>
+              <button
+                type="button"
+                onClick={() => navigate("/")}
+                className="text-primary"
+              >
+                Back
+              </button>
+            </form>
 
-          {status && (
-            <p className="status">
-              {status}
-            </p>
-          )}
+            {status && <p className="status">{status}</p>}
+          </div>
         </div>
-      </div>
 
-      <div className="map-container mt-4">
-        <iframe
-          title="Abuja Map"
-          src="https://www.google.com/maps?q=Abuja,Nigeria&output=embed"
-          width="100%"
-          height="350"
-          style={{ border: 0, borderRadius: "10px" }}
-          allowFullScreen=""
-          loading="lazy"
-        ></iframe>
-      </div>
+        <div className="map-container mt-4">
+          <iframe
+            title="Abuja Map"
+            src="https://www.google.com/maps?q=Abuja,Nigeria&output=embed"
+            width="100%"
+            height="350"
+            style={{ border: 0, borderRadius: "10px" }}
+            allowFullScreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }
