@@ -2,6 +2,8 @@ import "./Edit.css";
 import { getToken } from "../auth";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 function Edit() {
   const { id } = useParams();
@@ -12,7 +14,7 @@ function Edit() {
 
   // fetch single blog
   useEffect(() => {
-  fetch(`http://127.0.0.1:8000/class/blogs/${id}/`, {
+  fetch(`${API_URL}/class/blogs/${id}/`, {
     headers: {
       Authorization: `Token ${token}`,
     },
@@ -29,7 +31,7 @@ function Edit() {
     e.preventDefault();
 
     const response = await fetch(
-      `http://127.0.0.1:8000/class/blogs/${id}/`,
+      `${API_URL}/class/blogs/${id}/`,
       {
         method: "PATCH",
 

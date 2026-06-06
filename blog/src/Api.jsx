@@ -7,8 +7,8 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { Modal } from "bootstrap";
 import WelcomeCarousel from "./components/WelcomeCarousel";
-
 import { useSearchParams } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const fileInputRef = useRef(null);
@@ -32,19 +32,19 @@ function App() {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
   const goToPage = (page) => {
     if (page < 1 || page > totalPages) return;
-    setSearchParams({ page });
-    
+    setSearchParams({ page })
+    if(posts){
     window.scrollTo({
       top: 0,
       behavior: "smooth",
-    });
+    });}
+    
   };
-
+  
   const truncateText = (text, maxLength) => {
     if (!text) return "";
     return text.length > maxLength
@@ -54,11 +54,11 @@ function App() {
 
   const getImageUrl = (image) => {
     if (!image) return "/default.jpg";
-    return image.startsWith("http") ? image : `http://127.0.0.1:8000${image}`;
+    return image.startsWith("http") ? image : `${API_URL}${image}`;
   };
   // GET posts
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/class/blogs/")
+    fetch(`${API_URL}/class/blogs/`)
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);
@@ -81,7 +81,7 @@ function App() {
       formData.append("image", image);
     }
 
-    fetch("http://127.0.0.1:8000/class/blogs/", {
+    fetch(`${API_URL}/class/blogs/`, {
       method: "POST",
       headers: {
         Authorization: `Token ${token}`,
@@ -113,7 +113,7 @@ function App() {
   //delete post
   const handleDelete = (id) => {
     const token = getToken();
-    fetch(`http://127.0.0.1:8000/class/blogs/${id}/`, {
+    fetch(`${API_URL}/class/blogs/${id}/`, {
       method: "DELETE",
       headers: {
         Authorization: `Token ${token}`,
@@ -135,7 +135,6 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-
   if (loading) {
     return (
       <h2 style={{ color: "green", textAlign: "center", marginTop: "50px" }}>
@@ -152,13 +151,13 @@ function App() {
       </div>
       <div className="blog-container mt-0 pt-2">
         <div className="">
-          <form className="add-form mt-0" onSubmit={handleAddPost}>
+          <form className="add-form mt-0 mb-3" onSubmit={handleAddPost}>
             <p className="fs-6">
               Note: only registered users are allowed to add blog post/edit
             </p>
             <h2>Create New Post</h2>
             <Link to="/register">
-              <span className="text-warning fs-5">register</span>
+              <span className="fs-5 register">register</span>
               <i className="bi bi-person-plus fs-3"></i>
             </Link>
 
@@ -200,7 +199,7 @@ function App() {
                 <h4 className="card-title">{post.title}</h4>
 
                 <p className="card-text">{truncateText(post.content, 100)}</p>
-                
+
                 {post.user == currentUserId && (
                   <div className="users-btn mb-3">
                     <p
@@ -211,7 +210,7 @@ function App() {
                     </p>
 
                     <p
-                      className="text-secondary fw-bold"
+                      className="fw-bold blog-delete"
                       data-bs-toggle="modal"
                       data-bs-target="#deleteModal"
                       onClick={() => setDeleteId(post.id)}
@@ -249,6 +248,7 @@ function App() {
                   type="button"
                   className="btn-close"
                   aria-label="Close"
+                  data-bs-dismiss="modal"
                 ></button>
               </div>
 
@@ -294,10 +294,8 @@ function App() {
             Next
           </button>
         </div>
-        <div>
-          <Footer />
-        </div>
       </div>
+      <Footer />
     </>
   );
 }

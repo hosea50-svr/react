@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link,useNavigate } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -20,7 +22,7 @@ function Register() {
       alert("password must be at least 6 characters")
     }
     try {
-      await axios.post("http://127.0.0.1:8000/api/register/", {
+      await axios.post(`${API_URL}/api/register/`, {
         username,
         password,
       });

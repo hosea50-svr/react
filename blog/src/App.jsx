@@ -6,7 +6,7 @@ import Edit from "./pages/Edit";
 import BlogDetail from "./pages/BlogDetail";
 import ContactPage from "./pages/ContactPage";
 import About from "./pages/AboutPage";
-
+import "./App.css"
 
 function App() {
   return (

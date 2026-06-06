@@ -26,6 +26,11 @@ body{
   margin: 0 auto;
   padding: 0 100px 100px 100px;
 }
+@media screen and (max-width:500px){
+  .blog-container{
+    padding: 20px;
+  }
+}
 
 .blog-title {
   text-align: center;
@@ -78,21 +83,41 @@ body{
   width: 100%;
   margin-bottom:3px;
 }
-.blog-delete,
+
 .blog-edit{
-  color: red;
   font-family: sans-serif;
   font-weight: bold;
-  transition: 0.3s ease;
-}
-.blog-edit{
+  cursor: pointer;
   color: gold;
 }
+.blog-delete{
+  color: red;
+  cursor: pointer;
+}
+.register{
+  color: rgb(41, 192, 41);
+}
+.register:hover{
+  cursor: pointer;
+  color: white;
+  padding: 3px 9px;
+  border-radius: 5px;
+  background-color: blue;
+  text-decoration: none;
+}
 
-.blog-delete:hover,
+.blog-delete:hover{
+  background-color: red;
+  padding: 3px 5px;
+  border-radius: 5px;
+  color:white;
+}
+
 .blog-edit:hover{
-  opacity: 0.7;
-  transform: translateY(-3px) scale(1.03);
+  background-color: gold;
+  padding: 3px 9px;
+  border-radius: 5px;
+  color:white;
 }
 .users-btn{
   display: flex;
@@ -106,6 +131,7 @@ body{
 /*POST Form Css*/
 
 .add-form {
+  width: 100%;
   max-width: 500px;
   margin: 40px auto;
   padding: 30px;
@@ -113,8 +139,16 @@ body{
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   display: flex;
+  box-sizing: border-box;
   flex-direction: column;
   gap: 15px;
+}
+
+@media screen and (max-width: 500px) {
+  .add-form {
+    width: 100%;
+    padding: 10px;
+  }
 }
 
 .add-form h2 {
@@ -188,6 +222,7 @@ body{
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: center;
   gap: 20px;
 }
 
@@ -206,4 +241,9 @@ body{
 
 .card-text {
   min-height: 80px;
+}
+
+
+.btn-close:hover{
+  background-color: red !important;
 }

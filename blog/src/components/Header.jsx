@@ -52,6 +52,13 @@ export default function Header() {
               About
             </Link>
 
+            <Link
+              className="nav-link text-danger"
+              to="/login"
+            >
+              Log-out
+            </Link>
+
           </div>
         </div>
 

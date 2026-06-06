@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import "./ContactPage.css";
 import Header from "../components/Header";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function ContactPage() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export default function ContactPage() {
     setStatus("Sending...");
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/contact/", {
+      const res = await fetch(`${API_URL}/contact/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

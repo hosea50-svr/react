@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getToken } from "../auth";
 import "./BlogDetail.css";
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 function BlogDetail() {
   const [comments, setComments] = useState([]);
@@ -20,7 +22,7 @@ function BlogDetail() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(`http://127.0.0.1:8000/posts/${id}/like/`, {
+      const res = await fetch(`${API_URL}/posts/${id}/like/`, {
         method: "POST",
         headers: {
           Authorization: `Token ${token}`,
@@ -39,7 +41,7 @@ function BlogDetail() {
   };
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/posts/${id}/comments/`)
+    fetch(`${API_URL}/posts/${id}/comments/`)
       .then((res) => res.json())
       .then((data) => setComments(data));
   }, [id]);
@@ -48,7 +50,7 @@ function BlogDetail() {
     e.preventDefault();
 
     const response = await fetch(
-      `http://127.0.0.1:8000/posts/${id}/comments/`,
+      `${API_URL}/posts/${id}/comments/`,
       {
         method: "POST",
         headers: {
@@ -72,7 +74,7 @@ function BlogDetail() {
   };
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/class/blogs/${id}/`, {
+    fetch(`${API_URL}/class/blogs/${id}/`, {
       headers: {
         Authorization: `Token ${token}`,
       },
