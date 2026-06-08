@@ -53,9 +53,18 @@ function App() {
   };
 
   const getImageUrl = (image) => {
-    if (!image) return "/default.jpg";
-    return image.startsWith("http") ? image : `${API_URL}${image}`;
-  };
+  try {
+    if (typeof image !== "string" || !image) {
+      return "/default.jpg";
+    }
+
+    return image.startsWith("http")
+      ? image
+      : `${API_URL}${image}`;
+  } catch {
+    return "/default.jpg";
+  }
+};
   // GET posts
   useEffect(() => {
     fetch(`${API_URL}/class/blogs/`)
@@ -190,9 +199,9 @@ function App() {
           {currentPosts.map((post) => (
             <div className="card blog-card h-100" key={post.id}>
               <img
-                src={getImageUrl(post.image)}
+                src={getImageUrl(post?.image)}
                 className="card-img-top blog-image"
-                alt={post.title}
+                alt={post?.title || "image"}
               />
 
               <div className="card-body d-flex flex-column">
