@@ -1,7 +1,7 @@
 import CreatePost from "./Api";
 import { Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "./pages/login";
+import Register from "./pages/register";
 import Edit from "./pages/Edit";
 import BlogDetail from "./pages/BlogDetail";
 import ContactPage from "./pages/ContactPage";
