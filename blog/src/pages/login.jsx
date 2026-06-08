@@ -24,7 +24,7 @@ function Login() {
 
       setAuthUser(response.data);
 
-      console.log("Login successful:", response.data);
+
       alert("Login successful!");
       setAuthUser(response.data);
         setUsername("");
