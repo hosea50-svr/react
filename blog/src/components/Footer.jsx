@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-left">
-          <h4 className="text-warning">MyBlog
+          <h4 className="text-warning" style={{cursor:"pointer"}}>MyBlog
             <i className="bi bi-mortarboard text-primary"></i>
           </h4>
           <p>Sharing knowledge, ideas, and inspiration.</p>
