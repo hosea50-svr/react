@@ -11,6 +11,7 @@ import { useSearchParams } from "react-router-dom";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function App() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
   const currentUserId = getUserId();
@@ -77,47 +78,55 @@ function App() {
 
   // POST (add new post)
   const handleAddPost = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const token = getToken();
+  if (isSubmitting) return;
 
-    const formData = new FormData();
+  setIsSubmitting(true);
 
-    formData.append("title", title);
-    formData.append("content", content);
+  const token = getToken();
 
-    if (image) {
-      formData.append("image", image);
-    }
+  const formData = new FormData();
 
-    fetch(`${API_URL}/class/blogs/`, {
-      method: "POST",
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-      body: formData,
+  formData.append("title", title);
+  formData.append("content", content);
+
+  if (image) {
+    formData.append("image", image);
+  }
+
+  fetch(`${API_URL}/class/blogs/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+    body: formData,
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Failed to create post");
+      }
+      return res.json();
     })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to create post");
-        }
-        return res.json();
-      })
-      .then((newPost) => {
-        setPosts([newPost, ...posts]);
+    .then((newPost) => {
+      setPosts([newPost, ...posts]);
 
-        setTitle("");
-        setContent("");
-        setImage(null);
-        if (fileInputRef.current) {
-          fileInputRef.current.value = "";
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("Unauthorized or failed request");
-      });
-  };
+      setTitle("");
+      setContent("");
+      setImage(null);
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      alert("Unauthorized or failed request");
+    })
+    .finally(() => {
+      setIsSubmitting(false);
+    });
+};
 
   //delete post
   const handleDelete = (id) => {
@@ -191,7 +200,12 @@ function App() {
               onChange={(e) => setImage(e.target.files[0])}
             />
             <br />
-            <button type="submit">Add Post</button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Posting..." : "Add Post"}
+            </button>
           </form>
         </div>
 

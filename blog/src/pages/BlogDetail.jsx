@@ -99,7 +99,7 @@ function BlogDetail() {
     <div className="detail-container">
       <h1>{blog.title}</h1>
 
-      {blog?.image && <img src={blog.image} alt={blog.title} width="400" />}
+      {blog?.image && <img src={blog.image} alt={blog.title} className="img-fluid" />}
 
       <p className="blog-text">{blog.content}</p>
 
