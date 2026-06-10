@@ -73,19 +73,23 @@ function BlogDetail() {
     }
   };
 
-  useEffect(() => {
-    fetch(`${API_URL}/class/blogs/${id}/`, {
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setBlog(data);
-        setLikesCount(data.likes_count);
-        setLiked(data.is_liked);
-      });
-  }, [id, token]);
+useEffect(() => {
+  const headers = {};
+
+  if (token) {
+    headers.Authorization = `Token ${token}`;
+  }
+
+  fetch(`${API_URL}/class/blogs/${id}/`, {
+    headers,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      setBlog(data);
+      setLikesCount(data.likes_count);
+      setLiked(data.is_liked);
+    });
+}, [id, token]);
 
   if (!blog) {
     return (
