@@ -93,7 +93,7 @@ useEffect(() => {
 
   if (!blog) {
     return (
-      <h1 style={{ textAlign: "center", color: "gold", margin: "0 auto" }}>
+      <h1 style={{  color: "gold",textAlign: "center", marginTop: "70px" }}>
         Loading...
       </h1>
     );
